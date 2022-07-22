@@ -13,6 +13,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^5.1.0"
+    "concurrently": "^5.1.0",
+    "dotenv": "^16.0.1"
+  },
+  "dependencies": {
+    "path": "^0.12.7"
   }
 }

@@ -1,20 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-
-import { useMutation } from '@apollo/client';
-import { ADD_USER  } from '../utils/mutations';
-
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../utils/mutations";
 // import { createUser } from '../utils/API';
 import Auth from '../utils/auth';
 
 const SignupForm = () => {
   // set initial form state
-  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+  const [userFormData, setUserFormData] = useState({
+    username: "", email: "", password: "",
+  });
+
+  const [addUser, { error }] = useMutation(ADD_USER);
   // set state for form validation
   const [validated] = useState(false);
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
+
+  useEffect(() => {
+    if (error) {
+      setShowAlert(true);
+    } else {
+      setShowAlert(false);
+    }
+  }, [error]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -24,27 +33,27 @@ const SignupForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
+    // According to react-bootstrap
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
-
+    console.log("hello");
     try {
       const { data } = await addUser({
         variables: { ...userFormData },
       });
-
-      Auth.login(data.login.token);
-    } catch (err) {
-      console.error(err);
-      setShowAlert(true);
+      console.log(data);
+      Auth.login(data.addUser.token);
+    } catch (e) {
+      console.error(e);
     }
+
     setUserFormData({
-      username: '',
-      email: '',
-      password: '',
+      username: "",
+      email: "",
+      password: "",
     });
   };
 
