@@ -8,7 +8,7 @@ const {
 } = require('../../controllers/user-controller');
 
 // import middleware
-const { Middleware } = require('../../utils/');
+const { Middleware } = require('../../utils/routesAuth');
 
 // put Middleware anywhere we need to send a token for verification of user
 router.route('/').post(createUser).put(Middleware, saveBook);
