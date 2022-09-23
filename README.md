@@ -1,8 +1,8 @@
-# MERN Book Search Engine
+# Book Collection
 
 ## Description
 
-This is a Book Search Engine built with a React Front end and a Mongoose back end interfaced with a GraphQL API. The search engine was refactored from a Restful API to a GraphQL API using Apollo server. 
+This is a MERN Book Search Engine built with a React Front end and a Mongoose back end interfaced with a GraphQL API. The search engine was refactored from a Restful API to a GraphQL API using Apollo server. 
 
 The home page of the app allows you to search for books. The search results are populated using the Google Books API. You can search for any book or author you want, and browse the results. 
 
